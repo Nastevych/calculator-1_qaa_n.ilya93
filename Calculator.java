@@ -1,6 +1,5 @@
 package com.calculatorNastevychQaa;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculator {
@@ -15,21 +14,22 @@ public class Calculator {
         while (!"q".equals(operation)) {
             try {
                 System.out.println(calculationStep());
-            } catch (InputMismatchException ex) {
-                System.out.println("Wrong input data!");
-            }
+            } catch (NumberFormatException er) {
+                System.err.println("Wrong input data!");
+            } catch (UnsupportedOperationException ex) {
+                System.err.println("The operation is not supported!");}
         }
-    }
+        }
 
-        private double calculationStep () throws InputMismatchException {
-            System.out.println("Enter first number or q if you want to quit:");
+        private double calculationStep () throws NumberFormatException {
+            System.out.println("Enter first number:");
             double firstNumber = Double.parseDouble(scanner.nextLine());
-
-            System.out.println("Enter operation to perform (only '+, -, *, /' is available):");
-            operation = scanner.nextLine();
 
             System.out.println("Enter second number:");
             double secondNumber = Double.parseDouble(scanner.nextLine());
+
+            System.out.println("Enter operation to perform (only '+, -, *, /' is available):");
+            operation = scanner.nextLine();
 
             return performOperation(firstNumber, secondNumber);
         }
@@ -37,7 +37,6 @@ public class Calculator {
 
     private double performOperation(double firstNumber, double secondNumber) {
         double result;
-
         switch (operation){
             case "+":
                 result = plus(firstNumber, secondNumber);
@@ -58,16 +57,16 @@ public class Calculator {
         return result;
     }
 
-    private double plus(double numberOne, double numberTwo){
-        return numberOne + numberTwo;
+    private double plus(double firstNumber, double secondNumber){
+        return firstNumber + secondNumber;
     }
-    private  double minus(double numberOne, double numberTwo){
-        return  numberOne - numberTwo;
+    private  double minus(double firstNumber, double secondNumber){
+        return  firstNumber - secondNumber;
     }
-    private  double multiply(double numberOne, double numberTwo){
-        return  numberOne * numberTwo;
+    private  double multiply(double firstNumber, double secondNumber){
+        return  firstNumber * secondNumber;
     }
-    private  double divide(double numberOne, double numberTwo){
-        return  numberOne / numberTwo;
+    private  double divide(double firstNumber, double secondNumber){
+        return  firstNumber / secondNumber;
     }
 }
